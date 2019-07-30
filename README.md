@@ -17,9 +17,7 @@ Latest stable UrBackup release from AUR.
 **Usage**
 ```
 docker run -d \
-    -p 55413:55413 \
-    -p 55414:55414 \
-    -p 55415:55415 \
+    --net="host" \
     --name=<container name> \
     -v <path for media files>:/media \
     -v <path for config files>:/config \
@@ -39,9 +37,7 @@ Please replace all user variables in the above command defined by <> with the co
 **Example**
 ```
 docker run -d \
-    -p 55413:55413 \
-    -p 55414:55414 \
-    -p 55415:55415 \
+    --net="host" \
     --name=<container name> \
     -v /media/backups:/media \
     -v /apps/docker/urbackup/config:/config \
