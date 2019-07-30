@@ -35,11 +35,29 @@ aur_packages="urbackup2-server"
 # call aur install script (arch user repo)
 source aur.sh
 
+# config - urbackup
+####
+
+# path to default urbackup configuration file
+urbackup_config="/etc/default/urbackupsrv"
+
+# configure account
+sed -i -e 's~USER=".*"~USER="nobody"~g' "${urbackup_config}"
+
+# configure sqlite temp folder
+sed -i -e 's~SQLITE_TMPDIR=".*"~SQLITE_TMPDIR="/config/urbackup/sqlite/tmp"~g' "${urbackup_config}"
+
+# configure logfile location
+sed -i -e 's~LOGFILE=".*"~LOGFILE="/config/urbackup/log/urbackup.log"~g' "${urbackup_config}"
+
+# configure daemon temp folder
+sed -i -e 's~DAEMON_TMPDIR=".*"~DAEMON_TMPDIR="/config/urbackup/tmp"~g' "${urbackup_config}"
+
 # container perms
 ####
 
 # define comma separated list of paths
-install_paths="/usr/share/urbackup,/var/urbackup,/home/nobody"
+install_paths="/usr/share/urbackup,/home/nobody"
 
 # split comma separated string into list for install paths
 IFS=',' read -ra install_paths_list <<< "${install_paths}"
@@ -90,18 +108,19 @@ sed -i '/# PERMISSIONS_PLACEHOLDER/{
 }' /usr/local/bin/init.sh
 rm /tmp/permissions_heredoc
 
-
 # create file with contents of here doc, note EOF is NOT quoted to allow us to expand variables
-# we use escaping to prevent variable expansion if required
+# we use escaping to prevent variable expansion, as we want these expanded at runtime of init.sh
 cat <<EOF > /tmp/config_heredoc
-
-# create soft link to folder storing urbackup settings
-echo "[info] Creating soft link from /config/urbackup to /var/urbackup..."
-mkdir -p /config/urbackup ; rm -rf /var/urbackup ; ln -s /config/urbackup /var/urbackup
+# if volume does not exist or container folder is not soft linked then 
+# create/re-create soft link to folder (used to store urbackup settings)
+if [[ ! -d /config/urbackup || ! -L /var/urbackup ]]; then
+	echo "[info] Creating soft link from /config/urbackup to /var/urbackup..."
+	mkdir -p /config/urbackup ; chown -R nobody:users /config/urbackup ; rm -rf /var/urbackup ; ln -s /config/urbackup /var/urbackup
+fi
 
 EOF
 
-# replace config placeholder string with contents of file (here doc)
+# replace permissions placeholder string with contents of file (here doc)
 sed -i '/# CONFIG_PLACEHOLDER/{
     s/# CONFIG_PLACEHOLDER//g
     r /tmp/config_heredoc
