@@ -35,6 +35,9 @@ EXPOSE 55413
 # expose http port for server
 EXPOSE 55414
 
+# expose internet port (https) for server
+EXPOSE 55415
+
 # set environment variables for user nobody
 ENV HOME /home/nobody
 
