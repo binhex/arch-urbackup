@@ -90,6 +90,24 @@ sed -i '/# PERMISSIONS_PLACEHOLDER/{
 }' /usr/local/bin/init.sh
 rm /tmp/permissions_heredoc
 
+
+# create file with contents of here doc, note EOF is NOT quoted to allow us to expand variables
+# we use escaping to prevent variable expansion if required
+cat <<EOF > /tmp/config_heredoc
+
+# create soft link to folder storing urbackup settings
+echo "[info] Creating soft link from /config/urbackup to /var/urbackup..."
+mkdir -p /config/urbackup ; rm -rf /var/urbackup ; ln -s /config/urbackup /var/urbackup
+
+EOF
+
+# replace config placeholder string with contents of file (here doc)
+sed -i '/# CONFIG_PLACEHOLDER/{
+    s/# CONFIG_PLACEHOLDER//g
+    r /tmp/config_heredoc
+}' /usr/local/bin/init.sh
+rm /tmp/config_heredoc
+
 # env vars
 ####
 
