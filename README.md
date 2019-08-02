@@ -38,7 +38,7 @@ Please replace all user variables in the above command defined by <> with the co
 ```
 docker run -d \
     --net="host" \
-    --name=<container name> \
+    --name=urbackup \
     -v /media/backups:/media \
     -v /apps/docker/urbackup/config:/config \
     -v /etc/localtime:/etc/localtime:ro \
