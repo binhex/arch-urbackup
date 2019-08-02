@@ -30,10 +30,21 @@ fi
 ####
 
 # define aur packages
-aur_packages="urbackup2-server"
+aur_packages=""
 
 # call aur install script (arch user repo)
 source aur.sh
+
+# custom
+####
+
+package_name="urbackup2-server.tar.xz"
+
+# download compiled package
+curly.sh -rc 6 -rw 10 -of "/tmp/${package_name}" -url "https://github.com/binhex/arch-packages/raw/master/compiled/${package_name}"
+
+# install package using pacman
+pacman -U "/tmp/${package_name}" --noconfirm
 
 # config - urbackup
 ####
