@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages=""
+pacman_packages="crypto++ fuse"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -30,16 +30,13 @@ fi
 ####
 
 # define aur packages
-aur_packages=""
+aur_operations="-G"
+aur_options="--noconfirm"
+aur_packages="urbackup2-server"
+aur_custom_script="/root/custom.sh"
 
 # call aur install script (arch user repo)
 source aur.sh
-
-# custom
-####
-
-# call custom install script
-source /root/custom.sh
 
 # config - urbackup
 ####
