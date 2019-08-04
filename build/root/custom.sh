@@ -3,16 +3,11 @@
 # exit script if return code != 0
 set -e
 
-package="urbackup2-server"
+# name of aur package
+aur_package="urbackup2-server"
 
-# install pre-req packages for this package
-pacman -S crypto++ fuse --noconfirm
-
-cd /tmp
-
-# download and extract tarball (do not make or install)
-apacman -G "${package}" --noconfirm
-cd "./${package}"
+# location of downloaded and extracted tarball from aur (using aur.sh script)
+cd "/tmp/${package}"
 
 # strip out restriction to not allow make as user root
 sed -i -e 's~exit $E_ROOT~~g' '/usr/bin/makepkg'
@@ -24,4 +19,4 @@ sed -r -i -e 's~-march=native\s?~~g' 'PKGBUILD'
 /usr/bin/makepkg
 
 # install compiled package using pacman
-pacman -U ${package}*.tar.xz --noconfirm
+pacman -U ${aur_package}*.tar.xz --noconfirm
