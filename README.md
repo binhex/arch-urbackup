@@ -55,6 +55,11 @@ User ID (PUID) and Group ID (PGID) can be found by issuing the following command
 ```
 id <username>
 ```
+
+Caveats whilst running UrBackup:-
+
+- Image mounting is disabled
+- ZFS snapshotting cannot be used
 ___
 If you appreciate my work, then please consider buying me a beer  :D
 
