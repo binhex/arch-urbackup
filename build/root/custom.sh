@@ -7,7 +7,7 @@ set -e
 aur_package="urbackup2-server"
 
 # location of downloaded and extracted tarball from aur (using aur.sh script)
-cd "/tmp/${package}"
+cd "/tmp/${aur_package}"
 
 # strip out restriction to not allow make as user root
 sed -i -e 's~exit $E_ROOT~~g' '/usr/bin/makepkg'
