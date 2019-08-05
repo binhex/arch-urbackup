@@ -6,9 +6,14 @@ mkdir -p /config/urbackup/log
 mkdir -p /config/urbackup/tmp
 mkdir -p /config/urbackup/config
 
-# if config file doesnt exist then copy default
 if [[ ! -f /config/urbackup/config/urbackupsrv ]]; then
+
+	# copy default config to volume map
 	cp /etc/default/urbackupsrv /config/urbackup/config/urbackupsrv
+
+	# set default location for backup storage to /media
+	echo "/media" > /var/urbackup/backupfolder
+
 fi
 
 # run urbackup server
