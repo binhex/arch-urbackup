@@ -46,7 +46,10 @@ fi
 ####
 
 # define aur packages
+aur_operations="-G"
+aur_options="--noconfirm"
 aur_packages="urbackup2-server"
+aur_custom_script="/root/custom.sh"
 
 # call aur install script (arch user repo)
 source aur.sh
