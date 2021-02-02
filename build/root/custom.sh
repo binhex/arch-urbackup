@@ -18,7 +18,5 @@ sed -r -i -e 's~-march=native\s?~~g' 'PKGBUILD'
 # compile package
 /usr/bin/makepkg
 
-ls -alR
-
 # install compiled package using pacman
-pacman -U ${aur_package}*.tar.xz --noconfirm
+pacman -U ${aur_package}*.tar.zst --noconfirm
