@@ -3,6 +3,9 @@
 # exit script if return code != 0
 set -e
 
+# release tag name from build arg, stripped of build ver using string manipulation
+release_tag_name="${1//-[0-9][0-9]/}"
+
 # build scripts
 ####
 
@@ -105,7 +108,7 @@ cat <<EOF > /tmp/permissions_heredoc
 previous_puid=\$(cat "/root/puid" 2>/dev/null || true)
 previous_pgid=\$(cat "/root/pgid" 2>/dev/null || true)
 
-# if first run (no puid or pgid files in /tmp) or the PUID or PGID env vars are different 
+# if first run (no puid or pgid files in /tmp) or the PUID or PGID env vars are different
 # from the previous run then re-apply chown with current PUID and PGID values.
 if [[ ! -f "/root/puid" || ! -f "/root/pgid" || "\${previous_puid}" != "\${PUID}" || "\${previous_pgid}" != "\${PGID}" ]]; then
 
@@ -130,7 +133,7 @@ rm /tmp/permissions_heredoc
 # create file with contents of here doc, note EOF is NOT quoted to allow us to expand variables
 # we use escaping to prevent variable expansion, as we want these expanded at runtime of init.sh
 cat <<EOF > /tmp/config_heredoc
-# if volume does not exist or container folder is not soft linked then 
+# if volume does not exist or container folder is not soft linked then
 # create/re-create soft link to folder (used to store urbackup settings)
 if [[ ! -d /config/urbackup || ! -L /var/urbackup ]]; then
 	echo "[info] Creating soft link from /config/urbackup to /var/urbackup..."
