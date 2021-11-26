@@ -38,7 +38,7 @@ fi
 ####
 
 # define pacman packages
-pacman_packages="crypto++ fuse"
+pacman_packages="crypto++ fuse libguestfs"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
