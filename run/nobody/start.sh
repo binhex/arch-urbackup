@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/dumb-init /bin/bash
 
 # create folder structure for config, temp and logs
 mkdir -p /config/urbackup/sqlite/tmp
