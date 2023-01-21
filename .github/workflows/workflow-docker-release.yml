@@ -68,7 +68,7 @@ jobs:
         run: |
           app_name=$(echo "${GITHUB_REPOSITORY}" | grep -P -o -m 1 '(?<=/arch-).*')
           echo "[debug] Generated app name is '${app_name}'"
-          echo "::set-output name=app_name::$app_name"
+          echo "app_name=$app_name" >> $GITHUB_OUTPUT
         id: generate_app_name
       - name: Build Docker image and tag
         shell: bash
