@@ -20,3 +20,7 @@ sed -r -i -e 's~-march=native\s?~~g' 'PKGBUILD'
 
 # install compiled package using pacman
 pacman -U ${aur_package}*.tar.zst --noconfirm
+
+# enable btrfs snapshots in urbackup
+mkdir -p '/etc/urbackup'
+echo "/media" > '/etc/urbackup/backupfolder'
