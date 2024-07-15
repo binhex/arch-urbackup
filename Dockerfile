@@ -1,6 +1,6 @@
 FROM binhex/arch-base:latest
-LABEL org.opencontainers.image.authors = "binhex"
-LABEL org.opencontainers.image.source = "https://github.com/binhex/arch-urbackup"
+LABEL org.opencontainers.image.authors="binhex"
+LABEL org.opencontainers.image.source="https://github.com/binhex/arch-urbackup"
 
 # release tag name from buildx arg
 ARG RELEASETAG
@@ -40,7 +40,7 @@ EXPOSE 55414
 EXPOSE 55415
 
 # set environment variables for user nobody
-ENV HOME /home/nobody
+ENV HOME=/home/nobody
 
 # set permissions
 #################
