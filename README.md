@@ -1,22 +1,32 @@
-**Application**
+# Application
 
 [UrBackup](https://www.urbackup.org/)
 
-**Description**
+## Description
 
-UrBackup is an easy to setup Open Source client/server backup system, that through a combination of image and file backups accomplishes both data safety and a fast restoration time.
-File and image backups are made while the system is running without interrupting current processes.
-UrBackup also continuously watches folders you want backed up in order to quickly find differences to previous backups. Because of that, incremental file backups are really fast.
-Your files can be restored through the web interface, via the client or the Windows Explorer while the backups of drive volumes can be restored with a bootable CD or USB-Stick (bare metal restore).
-A web interface makes setting up your own backup server really easy. For a quick impression please look at the screenshots here.
+UrBackup is an easy to setup Open Source client/server backup system, that
+through a combination of image and file backups accomplishes both data safety
+and a fast restoration time.
+File and image backups are made while the system is running without interrupting
+current processes.
+UrBackup also continuously watches folders you want backed up in order to
+quickly find differences to previous backups. Because of that, incremental file
+backups are really fast.
+Your files can be restored through the web interface, via the client or the
+Windows Explorer while the backups of drive volumes can be restored with a
+bootable CD or USB-Stick (bare metal restore).
+A web interface makes setting up your own backup server really easy. For a quick
+impression please look at the screenshots here.
 
-**Build notes**
+## Build notes
 
 Latest stable UrBackup release from AUR.
 
-**Usage**
-```
+## Usage
+
+```bash
 docker run -d \
+
     --net="host" \
     --name=<container name> \
     -v <path for media files>:/media \
@@ -25,18 +35,23 @@ docker run -d \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
+
     binhex/arch-urbackup
+
 ```
 
-Please replace all user variables in the above command defined by <> with the correct values.
+Please replace all user variables in the above command defined by <> with the
+correct values.
 
-**Access application**<br>
+## Access application
 
 `<host ip>:55414`
 
-**Example**
-```
+## Example
+
+```bash
 docker run -d \
+
     --net="host" \
     --name=urbackup \
     -v /media/backups:/media \
@@ -45,21 +60,26 @@ docker run -d \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
+
     binhex/arch-urbackup
-```
-
-**Notes**<br>
-
-User ID (PUID) and Group ID (PGID) can be found by issuing the following command for the user you want to run the container as:-
 
 ```
+
+## Notes
+
+User ID (PUID) and Group ID (PGID) can be found by issuing the following command
+for the user you want to run the container as:-
+
+```bash
 id <username>
+
 ```
 
 Caveats whilst running UrBackup:-
 
 - Image mounting is disabled
 - ZFS snapshotting cannot be used
+
 ___
 If you appreciate my work, then please consider buying me a beer  :D
 
