@@ -118,7 +118,7 @@ EOF
 sed -i '/# PERMISSIONS_PLACEHOLDER/{
     s/# PERMISSIONS_PLACEHOLDER//g
     r /tmp/permissions_heredoc
-}' /usr/local/bin/shell/docker/init.sh
+}' /usr/bin/init.sh
 rm /tmp/permissions_heredoc
 
 # create file with contents of here doc, note EOF is NOT quoted to allow us to expand variables
@@ -137,7 +137,7 @@ EOF
 sed -i '/# CONFIG_PLACEHOLDER/{
     s/# CONFIG_PLACEHOLDER//g
     r /tmp/config_heredoc
-}' /usr/local/bin/shell/docker/init.sh
+}' /usr/bin/init.sh
 rm /tmp/config_heredoc
 
 # env vars
