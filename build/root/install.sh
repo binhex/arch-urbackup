@@ -58,7 +58,8 @@ fi
 aur_packages="urbackup2-server"
 
 # call aur install script (arch user repo)
-aur.sh --aur-package "${aur_packages}"
+# pkgbuild edit required to strip out extended cpu features to allow support for older procs
+aur.sh --aur-package "${aur_packages}" --pkgbuild-edit "sed -r -i -e 's~-march=native\s?~~g' 'PKGBUILD'"
 
 # config - urbackup
 ####
